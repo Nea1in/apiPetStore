@@ -16,7 +16,7 @@ public class PetController extends BaseController {
         return post(petConfig.getAddPetEndpoint(), pet);
     }
 
-    public Response updatePet(int petId, Pet pet) {
+    public Response updatePet(Long petId, Pet pet) {
         return put(petConfig.getUpdatePetEndpoint(), pet);
     }
 
@@ -25,7 +25,7 @@ public class PetController extends BaseController {
         return getById(petConfig.getGetPetByIdEndpoint(petId));
     }
 
-    public Response deletePet(int petId) {
+    public Response deletePet(Long petId) {
         return delete(petConfig.getDeletePetEndpoint(petId));
     }
 

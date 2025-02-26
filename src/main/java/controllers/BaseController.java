@@ -20,6 +20,7 @@ public class BaseController extends BaseConfig {
                 .when()
                 .log().method().request()
                 .log().uri()
+                .log().body()
                 .log().headers()
                 .get(path);
     }
@@ -43,6 +44,10 @@ public class BaseController extends BaseConfig {
                 .header(HEADER_CONTENT_TYPE, APPLICATION_JSON)
                 .contentType(ContentType.JSON)
                 .body(body)
+                .log().method().request()
+                .log().uri()
+                .log().body()
+                .log().headers()
                 .put(endpoint);
     }
 

@@ -15,7 +15,7 @@ public class PetConfig extends BaseConfig {
         return getProperty("pet.getById").replace("{petId}", String.valueOf(petId));
     }
 
-    public String getDeletePetEndpoint(int petId) {
+    public String getDeletePetEndpoint(Long petId) {
         return getProperty("pet.delete").replace("{petId}", String.valueOf(petId));
     }
 }
