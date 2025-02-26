@@ -43,6 +43,10 @@ public class PetControllerTest {
         System.out.println(pet1.toString());
 
         assertEquals(pet1.getName(), "Buddy");
+        pet1.setName("Ban");
+        response = petController.updatePet(petId,pet1);
+        pet1 = response.as(Pet.class);
+        System.out.println(pet1.toString());
         assertEquals(response.getStatusCode(), HttpStatus.SC_OK);
     }
 
