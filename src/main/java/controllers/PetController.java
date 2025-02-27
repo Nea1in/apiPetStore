@@ -16,12 +16,11 @@ public class PetController extends BaseController {
         return post(petConfig.getAddPetEndpoint(), pet);
     }
 
-    public Response updatePet(Long petId, Pet pet) {
-        return put(petConfig.getUpdatePetEndpoint(), pet);
+    public Response updatePet(Pet pet) {
+        return put(petConfig.getUpdatePetEndpoint(),pet);
     }
 
     public Response getPetById(Long petId) {
-
         return getById(petConfig.getGetPetByIdEndpoint(petId));
     }
 
