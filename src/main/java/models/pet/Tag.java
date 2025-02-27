@@ -8,13 +8,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Tag {
-
-
     private long id;
     private String name;
-
-
-
-
-
 }

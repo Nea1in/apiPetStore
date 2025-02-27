@@ -11,8 +11,6 @@ public class BaseController extends BaseConfig {
     protected static final String HEADER_CONTENT_TYPE = "Content-Type";
     protected static final String APPLICATION_JSON = "application/json";
 
-
-
     protected Response getById(String path) {
         return RestAssured.given()
                 .header(HEADER_CONTENT_TYPE, APPLICATION_JSON)
@@ -37,7 +35,6 @@ public class BaseController extends BaseConfig {
                 .log().headers()
                 .post( path);
     }
-
 
     public Response put(String endpoint, Object body) {
         return RestAssured.given()

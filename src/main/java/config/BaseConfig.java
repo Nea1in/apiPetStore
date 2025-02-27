@@ -8,7 +8,6 @@ import java.util.Properties;
 public class BaseConfig {
 
     protected Properties properties;
-
     public static final String BASE_URL;
 
     static {
