@@ -4,6 +4,8 @@ import config.PetConfig;
 import io.restassured.response.Response;
 import models.pet.Pet;
 
+import java.math.BigInteger;
+
 public class PetController extends BaseController {
 
     private final PetConfig petConfig;
@@ -20,11 +22,11 @@ public class PetController extends BaseController {
         return put(petConfig.getUpdatePetEndpoint(),pet);
     }
 
-    public Response getPetById(Long petId) {
+    public Response getPetById(BigInteger petId) {
         return getById(petConfig.getGetPetByIdEndpoint(petId));
     }
 
-    public Response deletePet(Long petId) {
+    public Response deletePet(BigInteger petId) {
         return delete(petConfig.getDeletePetEndpoint(petId));
     }
 

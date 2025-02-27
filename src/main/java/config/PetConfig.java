@@ -1,5 +1,7 @@
 package config;
 
+import java.math.BigInteger;
+
 public class PetConfig extends BaseConfig {
 
 
@@ -11,11 +13,11 @@ public class PetConfig extends BaseConfig {
         return BASE_URL + getProperty("pet.update");
     }
 
-    public String getGetPetByIdEndpoint(Long petId) {
+    public String getGetPetByIdEndpoint(BigInteger petId) {
         return getProperty("pet.getById").replace("{petId}", String.valueOf(petId));
     }
 
-    public String getDeletePetEndpoint(Long petId) {
+    public String getDeletePetEndpoint(BigInteger petId) {
         return getProperty("pet.delete").replace("{petId}", String.valueOf(petId));
     }
 }
