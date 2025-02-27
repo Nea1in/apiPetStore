@@ -1,5 +1,6 @@
 package models.pet;
 
+import java.math.BigInteger;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -9,7 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Pet {
-    private long id;
+    private BigInteger id;
     private Category category;
     private String name;
     private List<String> photoUrls;
