@@ -15,7 +15,7 @@ import java.util.Arrays;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 
-public class PetControllerTest extends BaseTest {
+public class PetControllerTest extends BaseTestForPet {
 
     @DataProvider(name = "petData")
     public Object[][] petDataProvider() {
@@ -38,15 +38,18 @@ public class PetControllerTest extends BaseTest {
         };
     }
 
-    @Test(dataProvider = "petData")
+    @Test(dataProvider = "petData", description = "Test to create a new pet and then retrieve it using its ID")
     public void testCreateAndGetPet(Pet pet) {
+        logger.info("Creating pet: {}", pet.getName());
         Response response = petController.createPet(pet);
         assertEquals(response.getStatusCode(), HttpStatus.SC_OK, "Pet not created");
 
         Pet createdPet = response.as(Pet.class);
         BigInteger petId = createdPet.getId();
         trackCreatedPet(petId);
-        assertNotNull(createdPet.getId(), "Pet ID is null after creation!");
+
+        assertNotNull(petId, "Pet ID is null after creation!");
+        logger.info("Pet created successfully with ID: {}", petId);
 
         Response responseGet = petController.getPetById(petId);
         assertEquals(responseGet.getStatusCode(), HttpStatus.SC_OK);
@@ -55,7 +58,7 @@ public class PetControllerTest extends BaseTest {
         assertEquals(retrievedPet.getName(), pet.getName());
     }
 
-    @Test(dataProvider = "petData")
+    @Test(dataProvider = "petData", description = "Test to create and then update a pet's details")
     public void testCreateAndUpdatePet(Pet pet) {
         Response response = petController.createPet(pet);
         assertEquals(response.getStatusCode(), HttpStatus.SC_OK);
@@ -64,12 +67,13 @@ public class PetControllerTest extends BaseTest {
         BigInteger petId = createdPet.getId();
         trackCreatedPet(petId);
 
+        logger.info("Updating pet ID {} to new name: UpdatedName", petId);
         createdPet.setName("UpdatedName");
         Response updateResponse = petController.updatePet(createdPet);
         assertEquals(updateResponse.getStatusCode(), HttpStatus.SC_OK);
 
         Pet updatedPet = updateResponse.as(Pet.class);
         assertEquals(updatedPet.getName(), "UpdatedName");
-
+        logger.info("Pet updated successfully: {}", updatedPet);
     }
 }
