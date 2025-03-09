@@ -10,9 +10,6 @@ public abstract class BaseTest {
     @BeforeMethod
     public void logTestStart(Object[] testArgs) {
         logger.info("===== STARTING TEST: {} =====", getTestName());
-        if (testArgs.length > 0) {
-            logger.info("Test parameters: {}", (Object) testArgs);
-        }
     }
 
     @AfterMethod

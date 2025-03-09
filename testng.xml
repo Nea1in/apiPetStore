@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="PetTestsSuite">
+    <test name="PetControllerTests">
+        <classes>
+            <class name="tests.petTests.PetGetByIdTest"/>
+        </classes>
+    </test>
+
+    <test name="PetUpdateTests">
+        <classes>
+            <class name="tests.petTests.PetUpdateTest"/>
+        </classes>
+    </test>
+
+    <test name="PetStatusTests">
+        <classes>
+            <class name="tests.petTests.PetGetByStatusTest"/>
+        </classes>
+    </test>
+</suite>

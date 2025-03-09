@@ -26,6 +26,10 @@ public class PetController extends BaseController {
         return getById(petConfig.getGetPetByIdEndpoint(petId));
     }
 
+    public Response getPetsByStatus(String status) {
+        return getByStatus(petConfig.getPetsByStatusEndpoint(status));
+    }
+
     public Response deletePet(BigInteger petId) {
         return delete(petConfig.getDeletePetEndpoint(petId));
     }
