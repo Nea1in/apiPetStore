@@ -26,6 +26,10 @@ public class BaseController extends BaseConfig {
         return buildRequest().get(endpoint);
     }
 
+    protected Response getByStatus(String endpoint) {
+        return buildRequest().get(endpoint);
+    }
+
     protected Response post(String endpoint, Object body) {
         return buildRequest().body(body).post(endpoint);
     }

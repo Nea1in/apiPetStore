@@ -1,0 +1,16 @@
+[
+  {
+    "name": "Buddy",
+    "category": { "id": 1, "name": "Dog" },
+    "photoUrls": ["http://example.com/photo.jpg"],
+    "tags": [ { "id": 1, "name": "Friendly" }, { "id": 2, "name": "Active" } ],
+    "status": "available"
+  },
+  {
+    "name": "Milo",
+    "category": { "id": 2, "name": "Cat" },
+    "photoUrls": ["http://example.com/photo.jpg"],
+    "tags": [ { "id": 3, "name": "Playful" } ],
+    "status": "available"
+  }
+]
