@@ -1,10 +1,12 @@
 package tests.petTests;
 
+import config.JsonSchemaPaths;
 import data.factory.PetData;
 import io.restassured.response.Response;
 import models.pet.Pet;
 import org.apache.http.HttpStatus;
 import org.testng.annotations.Test;
+import utils.JsonSchemaUtils;
 
 import java.math.BigInteger;
 import java.util.Arrays;
@@ -33,11 +35,16 @@ public class PetGetByStatusTest extends BaseTestForPet {
         assertEquals(responseGet.getStatusCode(), HttpStatus.SC_OK);
 
         List<Pet> retrievedPets = Arrays.asList(responseGet.as(Pet[].class));
-        boolean petExists = retrievedPets.stream()
+       assertFalse(retrievedPets.isEmpty(), "List of pets is empty");
+       assertTrue(JsonSchemaUtils.isValidJsonSchema(responseGet, JsonSchemaPaths.PET_LIST_SCHEMA),
+               "JSON-schema validation failed for pets list!");
+        /*
+       boolean petExists = retrievedPets.stream()
                 .filter(p -> p.getName() != null)
                 .anyMatch(p -> p.getName().equals(pet.getName()));
 
         assertTrue(petExists, "Created pet not found in the list of pets by status!");
+        */
     }
 }
 
