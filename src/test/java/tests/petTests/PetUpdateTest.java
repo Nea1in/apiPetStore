@@ -1,5 +1,6 @@
 package tests.petTests;
 
+import data.factory.PetData;
 import io.restassured.response.Response;
 import models.pet.Pet;
 import org.apache.http.HttpStatus;
@@ -12,8 +13,9 @@ import static org.testng.Assert.assertEquals;
 
 public class PetUpdateTest extends BaseTestForPet {
 
-    @Test(dataProvider = "petData", dataProviderClass = PetDataProvider.class, description = "Test to create and then update a pet's details")
-    public void testCreateAndUpdatePet(Pet pet) {
+    @Test(description = "Test to create and then update a pet's details")
+    public void testCreateAndUpdatePet() {
+        Pet pet = PetData.generatePet();
         Response response = petController.createPet(pet);
         assertEquals(response.getStatusCode(), HttpStatus.SC_OK);
 

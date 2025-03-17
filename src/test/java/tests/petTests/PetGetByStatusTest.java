@@ -5,7 +5,6 @@ import io.restassured.response.Response;
 import models.pet.Pet;
 import org.apache.http.HttpStatus;
 import org.testng.annotations.Test;
-import tests.dataProviders.PetDataProvider;
 
 import java.math.BigInteger;
 import java.util.Arrays;
@@ -15,8 +14,7 @@ import static org.testng.Assert.*;
 
 public class PetGetByStatusTest extends BaseTestForPet {
 
-   // @Test(dataProvider = "petData", dataProviderClass = PetDataProvider.class, description = "Test to create a new pet and then retrieve it using its status")
-   @Test
+   @Test(description = "Test to create a new pet and then retrieve it using its status")
     public void testCreateAndGetPetsByStatus() {
         Pet pet = PetData.generatePet();
         logger.info("Creating pet: {}", pet.getName());
@@ -35,7 +33,7 @@ public class PetGetByStatusTest extends BaseTestForPet {
         assertEquals(responseGet.getStatusCode(), HttpStatus.SC_OK);
 
         List<Pet> retrievedPets = Arrays.asList(responseGet.as(Pet[].class));
-       //retrievedPets.forEach(p -> logger.info("Retrieved pet: ID={}, Name={}", p.getId(), p.getName()));
+       retrievedPets.forEach(p -> logger.info("Retrieved pet: ID={}, Name={}", p.getId(), p.getName()));
         boolean petExists = retrievedPets.stream()
                 .filter(p -> p.getName() != null)
                 .anyMatch(p -> p.getName().equals(pet.getName()));

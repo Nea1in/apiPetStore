@@ -6,7 +6,6 @@ import io.restassured.response.Response;
 import models.pet.Pet;
 import org.apache.http.HttpStatus;
 import org.testng.annotations.Test;
-import tests.dataProviders.PetDataProvider;
 import utils.JsonSchemaUtils;
 
 import java.math.BigInteger;
@@ -15,8 +14,7 @@ import static org.testng.Assert.*;
 
 public class PetGetByIdTest extends BaseTestForPet {
 
-   // @Test(dataProvider = "petData", dataProviderClass = PetDataProvider.class, description = "Test to create a new pet and then retrieve it using its ID")
-   @Test
+   @Test(description = "Test to create a new pet and then retrieve it using its ID")
     public void testCreateAndGetPet() {
         Pet pet = PetData.generatePet();
         logger.info("Creating pet: {}", pet.getName());
