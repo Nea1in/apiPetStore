@@ -1,5 +1,6 @@
 package tests.petTests;
 
+import data.factory.PetData;
 import io.restassured.response.Response;
 import models.pet.Pet;
 import org.apache.http.HttpStatus;
@@ -14,8 +15,10 @@ import static org.testng.Assert.*;
 
 public class PetGetByStatusTest extends BaseTestForPet {
 
-    @Test(dataProvider = "petData", dataProviderClass = PetDataProvider.class, description = "Test to create a new pet and then retrieve it using its status")
-    public void testCreateAndGetPetsByStatus(Pet pet) {
+   // @Test(dataProvider = "petData", dataProviderClass = PetDataProvider.class, description = "Test to create a new pet and then retrieve it using its status")
+   @Test
+    public void testCreateAndGetPetsByStatus() {
+        Pet pet = PetData.generatePet();
         logger.info("Creating pet: {}", pet.getName());
 
         Response response = petController.createPet(pet);
@@ -32,7 +35,9 @@ public class PetGetByStatusTest extends BaseTestForPet {
         assertEquals(responseGet.getStatusCode(), HttpStatus.SC_OK);
 
         List<Pet> retrievedPets = Arrays.asList(responseGet.as(Pet[].class));
+       //retrievedPets.forEach(p -> logger.info("Retrieved pet: ID={}, Name={}", p.getId(), p.getName()));
         boolean petExists = retrievedPets.stream()
+                .filter(p -> p.getName() != null)
                 .anyMatch(p -> p.getName().equals(pet.getName()));
 
         assertTrue(petExists, "Created pet not found in the list of pets by status!");

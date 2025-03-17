@@ -1,20 +1,24 @@
 package tests.petTests;
 
+import config.JsonSchemaPaths;
+import data.factory.PetData;
 import io.restassured.response.Response;
 import models.pet.Pet;
 import org.apache.http.HttpStatus;
 import org.testng.annotations.Test;
 import tests.dataProviders.PetDataProvider;
+import utils.JsonSchemaUtils;
 
 import java.math.BigInteger;
 
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertNotNull;
+import static org.testng.Assert.*;
 
 public class PetGetByIdTest extends BaseTestForPet {
 
-    @Test(dataProvider = "petData", dataProviderClass = PetDataProvider.class, description = "Test to create a new pet and then retrieve it using its ID")
-    public void testCreateAndGetPet(Pet pet) {
+   // @Test(dataProvider = "petData", dataProviderClass = PetDataProvider.class, description = "Test to create a new pet and then retrieve it using its ID")
+   @Test
+    public void testCreateAndGetPet() {
+        Pet pet = PetData.generatePet();
         logger.info("Creating pet: {}", pet.getName());
         Response response = petController.createPet(pet);
         assertEquals(response.getStatusCode(), HttpStatus.SC_OK, "Pet not created");
@@ -28,8 +32,9 @@ public class PetGetByIdTest extends BaseTestForPet {
 
         Response responseGet = petController.getPetById(petId);
         assertEquals(responseGet.getStatusCode(), HttpStatus.SC_OK);
-
-        Pet retrievedPet = responseGet.as(Pet.class);
-        assertEquals(retrievedPet.getName(), pet.getName());
+        assertTrue(JsonSchemaUtils.isValidJsonSchema(responseGet, JsonSchemaPaths.PET_SCHEMA),
+                "JSON-schema validation failed");
+       Pet getPet = responseGet.as(Pet.class);
+       assertEquals(getPet.getName(), pet.getName());
     }
 }
